@@ -1,0 +1,33 @@
+﻿<Window x:Class="Grapher.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Grapher"
+        mc:Ignorable="d"
+        Title="Grapher" Height="450" Width="800">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+
+
+		<Grid Column="1" ColumnSpan="2" Row="1" RowSpan="2">
+			<StackPanel>
+				<Label x:Name="errorLb" Margin="10" />
+				<TextBlock x:Name="Id" MinHeight="100" />
+				<TextBlock x:Name="ODataContext" MinHeight="100" />
+			</StackPanel>
+
+		</Grid>
+	</Grid>
+</Window>
