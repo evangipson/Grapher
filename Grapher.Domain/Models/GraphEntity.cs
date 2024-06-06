@@ -1,4 +1,5 @@
-﻿using Grapher.Base.Models;
+﻿using System.Text.Json.Serialization;
+using Grapher.Base.Models;
 
 namespace Grapher.Domain.Models
 {
@@ -15,30 +16,40 @@ namespace Grapher.Domain.Models
         /// </summary>
         private IEnumerable<string>? _businessPhones;
 
-        public string? UserPrincipalName { get; set; }
+		[JsonPropertyName("userPrincipalName")]
+		public string? UserPrincipalName { get; set; }
 
-        public string? DisplayName { get; set; }
+		[JsonPropertyName("displayName")]
+		public string? DisplayName { get; set; }
 
-        public string? Surname { get; set; }
+		[JsonPropertyName("surname")]
+		public string? Surname { get; set; }
 
-        public string? GivenName { get; set; }
+		[JsonPropertyName("givenName")]
+		public string? GivenName { get; set; }
 
-        public string? PreferredLanguage { get; set; }
+		[JsonPropertyName("preferredLanguage")]
+		public string? PreferredLanguage { get; set; }
 
-        public string? Mail { get; set; }
+		[JsonPropertyName("mail")]
+		public string? Mail { get; set; }
 
-        public string? MobilePhone { get; set; }
+		[JsonPropertyName("mobilePhone")]
+		public string? MobilePhone { get; set; }
 
-        public string? JobTitle { get; set; }
+		[JsonPropertyName("jobTitle")]
+		public string? JobTitle { get; set; }
 
-        public string? OfficeLocation { get; set; }
+		[JsonPropertyName("officeLocation")]
+		public string? OfficeLocation { get; set; }
 
-        /// <summary>
-        /// A collection of phone numbers for an entity's
-        /// business. Will never be <c>null</c>, by default
-        /// will be an empty list of <c>string</c>.
-        /// </summary>
-        public IEnumerable<string> BusinessPhones
+		/// <summary>
+		/// A collection of phone numbers for an entity's
+		/// business. Will never be <c>null</c>, by default
+		/// will be an empty list of <c>string</c>.
+		/// </summary>
+		[JsonPropertyName("businessPhones")]
+		public IEnumerable<string> BusinessPhones
         {
             get => _businessPhones ?? (_businessPhones = new List<string>());
             set => _businessPhones = value;

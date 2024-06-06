@@ -21,13 +21,19 @@
 		</Grid.RowDefinitions>
 
 
-		<Grid Column="1" ColumnSpan="2" Row="1" RowSpan="2">
+		<Grid Column="1" ColumnSpan="2" Row="1" RowSpan="1">
 			<StackPanel>
 				<Label x:Name="errorLb" Margin="10" />
-				<TextBlock x:Name="Id" MinHeight="100" />
-				<TextBlock x:Name="ODataContext" MinHeight="100" />
+				<TextBlock x:Name="DisplayName" FontSize="32px" MinHeight="100" />
 			</StackPanel>
+		</Grid>
 
+		<Grid Column="1" ColumnSpan="2" Row="2" RowSpan="1">
+			<StackPanel>
+				<TextBlock x:Name="ODataContext" MinHeight="100" />
+				<TextBlock x:Name="AppId" MinHeight="100" />
+				<TextBlock x:Name="CreatedDateTime" MinHeight="100" />
+			</StackPanel>
 		</Grid>
 	</Grid>
 </Window>

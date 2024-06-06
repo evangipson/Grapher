@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-
 using Grapher.Services.Interfaces;
 
 namespace Grapher
@@ -15,9 +14,24 @@ namespace Grapher
 		{
 			InitializeComponent();
 			_requestService = requestService;
-			var graphEntity = _requestService.GetGraphEntity();
-			Id.Text = graphEntity.Id;
-			ODataContext.Text = graphEntity.ODataContext;
+
+			RenderEntity();
+		}
+
+		private void RenderEntity()
+		{
+			var entity = _requestService.GetGraphEntity();
+			AppId.Text = entity.Id;
+			ODataContext.Text = entity.ODataContext;
+		}
+
+		private void RenderApplication()
+		{
+			var application = _requestService.GetGraphApplication();
+			DisplayName.Text = application.DisplayName;
+			AppId.Text = application.AppId;
+			ODataContext.Text = application.ODataContext;
+			CreatedDateTime.Text = application.CreatedDateTime;
 		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using Grapher.Domain.Models;
+﻿using Grapher.Base.Models;
+using Grapher.Domain.Models;
 
 namespace Grapher.Services.Interfaces
 {
@@ -18,5 +19,18 @@ namespace Grapher.Services.Interfaces
         /// as a domain <see cref="GraphEntity"/>.
         /// </returns>
         GraphEntity GetGraphEntity();
-    }
+
+		/// <summary>
+		/// Attempts to GET an
+		/// <see href="https://learn.microsoft.com/en-us/graph/api/resources/application">application</see>
+		/// from <see href="https://learn.microsoft.com/en-us/graph/">Microsoft's Graph API</see>.
+		/// </summary>
+		/// <returns>
+		/// An <see href="https://learn.microsoft.com/en-us/graph/api/resources/application">application</see>
+		/// from <see href="https://learn.microsoft.com/en-us/graph/">Microsoft's Graph API</see>,
+		/// as a domain <see cref="GraphApplication"/>.
+		/// </returns>
+		GraphApplication GetGraphApplication();
+
+	}
 }

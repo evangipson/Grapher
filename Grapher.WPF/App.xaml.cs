@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using System.Text;
 using System.Windows;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using Grapher.Base.DependencyInjection;
@@ -19,6 +20,7 @@ namespace Grapher
 		{
 			var serviceCollection = new ServiceCollection();
 			ConfigureServices(serviceCollection);
+
 			Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 			ServiceProvider = serviceCollection.BuildServiceProvider();
 			var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
@@ -27,8 +29,18 @@ namespace Grapher
 
 		private void ConfigureServices(IServiceCollection serviceCollection)
 		{
+			// configure ILogger service
+			serviceCollection.AddLogging();
+
+			// configure user secrets service
+			var userSecretsConfig = new ConfigurationBuilder().AddUserSecrets<App>().Build();
+			serviceCollection.AddScoped<IConfiguration>(_ => userSecretsConfig);
+
+			// configure dependency-injected services
 			serviceCollection.AddHttpClient();
 			serviceCollection.AddServicesFromAssembly(Assembly.GetAssembly(typeof(RequestService)));
+
+			// lastly, add the MainWindow transient application service
 			serviceCollection.AddTransient(typeof(MainWindow));
 		}
 	}
