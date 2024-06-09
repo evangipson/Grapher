@@ -3,36 +3,62 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Grapher"
-        mc:Ignorable="d"
-        Title="Grapher" Height="450" Width="800">
-	<Grid>
+		mc:Ignorable="d"
+        Title="Grapher"
+		WindowStartupLocation="CenterScreen"
+		Background="#11FFFFFF"
+		AllowsTransparency="True"
+		WindowStyle="None"
+		Height="720"
+		Width="960"
+		Loaded="Window_Loaded">
+	<Grid TextElement.Foreground="GhostWhite" TextElement.FontSize="16">
+		<Grid.Resources>
+			<ResourceDictionary>
+				<ResourceDictionary.MergedDictionaries>
+					<ResourceDictionary Source="MainStyle.xaml"/>
+				</ResourceDictionary.MergedDictionaries>
+			</ResourceDictionary>
+		</Grid.Resources>
 		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
+			<RowDefinition Height="28"/>
+			<RowDefinition Height="*" />
 			<RowDefinition Height="*" />
 			<RowDefinition Height="*" />
 			<RowDefinition Height="*" />
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
-
-
-		<Grid Column="1" ColumnSpan="2" Row="1" RowSpan="1">
-			<StackPanel>
-				<Label x:Name="errorLb" Margin="10" />
-				<TextBlock x:Name="DisplayName" FontSize="32px" MinHeight="100" />
-			</StackPanel>
+		<!--<Grid.OpacityMask>
+		<VisualBrush Visual="{Binding ElementName=MainBorder}" />
+	</Grid.OpacityMask>
+	<Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6" Grid.RowSpan="6" x:Name="MainBorder" CornerRadius="24" BorderBrush="Transparent" BorderThickness="0" Background="Transparent" />-->
+		<Grid Column="0" ColumnSpan="6" Row="0" RowSpan="1" MouseDown="Titlebar_MouseDown">
+			<TextBlock Margin="8,2,8,0">Grapher</TextBlock>
+			<Menu TextElement.FontSize="18" TextElement.Foreground="GhostWhite" Background="#00FFFFFF" HorizontalAlignment="Right">
+				<MenuItem Header="─" Click="Window_Minimize" Style="{StaticResource MenuItemStyle}" />
+				<MenuItem Header="▢" Click="Window_Maximize" Style="{StaticResource MenuItemStyle}" />
+				<MenuItem Header="✕" Click="Window_Close" Style="{StaticResource MenuItemStyle}" />
+			</Menu>
 		</Grid>
-
-		<Grid Column="1" ColumnSpan="2" Row="2" RowSpan="1">
+		<Grid Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="4" Grid.RowSpan="3" TextBlock.FontSize="32">
 			<StackPanel>
-				<TextBlock x:Name="ODataContext" MinHeight="100" />
-				<TextBlock x:Name="AppId" MinHeight="100" />
-				<TextBlock x:Name="CreatedDateTime" MinHeight="100" />
+				<TextBlock Text="Welcome to Grapher" HorizontalAlignment="Center" Style="{StaticResource TextBlockFadeIn}">
+					<TextBlock.RenderTransform>
+						<TranslateTransform />
+					</TextBlock.RenderTransform>
+				</TextBlock>
+				<TextBlock x:Name="DisplayName" FontSize="32" />
+				<TextBlock x:Name="ODataContext" FontSize="32" />
+				<TextBlock x:Name="AppId" FontSize="32" />
+				<TextBlock x:Name="CreatedDateTime" FontSize="32" />
 			</StackPanel>
 		</Grid>
 	</Grid>

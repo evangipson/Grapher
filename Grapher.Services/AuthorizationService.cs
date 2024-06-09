@@ -1,10 +1,11 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System.Net.Http.Json;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 using Grapher.Base.DependencyInjection;
-using Grapher.Services.Interfaces;
-using System.Net.Http.Json;
 using Grapher.Base.Models;
+using Grapher.Base.Services.Interfaces;
+using Grapher.Services.Interfaces;
 
 namespace Grapher.Services
 {
@@ -15,6 +16,7 @@ namespace Grapher.Services
 		private readonly IHttpClientFactory _httpClientFactory;
 		private readonly IConfiguration _configuration;
 		private readonly ILogger<AuthorizationService> _logger;
+		private readonly ITaskService _taskService;
 		private readonly HttpClient _requestClient;
 		private readonly string _clientId;
 		private readonly string _clientSecret;
@@ -25,11 +27,12 @@ namespace Grapher.Services
 		private string _bearerToken = string.Empty;
 		private bool _isAuthorized = false;
 
-		public AuthorizationService(IHttpClientFactory httpClientFactory, ILogger<AuthorizationService> logger, IConfiguration configuration)
+		public AuthorizationService(IHttpClientFactory httpClientFactory, ILogger<AuthorizationService> logger, IConfiguration configuration, ITaskService taskService)
 		{
 			_logger = logger;
 			_configuration = configuration;
 			_httpClientFactory = httpClientFactory;
+			_taskService = taskService;
 			_requestClient = _httpClientFactory.CreateClient();
 
 			_clientId = _configuration["Authorization:ClientId"] ?? string.Empty;
@@ -77,18 +80,19 @@ namespace Grapher.Services
 			});
 
 			_logger.LogInformation($"{nameof(GetAccessToken)} info: attempting to post to {_tokenEndpoint} to recieve an access token.");
-			var response = _requestClient.PostAsync(_tokenEndpoint, authRequest).Result;
-			var responseString = response.Content.ReadFromJsonAsync(typeof(AuthTokenResponse)).Result as AuthTokenResponse;
-			if (string.IsNullOrEmpty(responseString?.AccessToken))
+			var response = _taskService.GetTaskResult(_requestClient.PostAsync(_tokenEndpoint, authRequest));
+			var authToken = _taskService.GetTaskResult(response.Content.ReadFromJsonAsync(typeof(AuthTokenResponse))) as AuthTokenResponse;
+
+			if (string.IsNullOrEmpty(authToken?.AccessToken))
 			{
 				_logger.LogError($"{nameof(GetAccessToken)} error: the auth token endpoint returned an empty response, send back an empty string.");
 				return string.Empty;
 			}
 
 			_logger.LogInformation($"{nameof(GetAccessToken)} info: bearer token successfully generated, setting authorized state for Grapher.");
-			_logger.LogInformation($"{nameof(GetAccessToken)} response: {responseString}");
+			_logger.LogInformation($"{nameof(GetAccessToken)} response: {authToken}");
 			_isAuthorized = true;
-			return responseString.AccessToken;
+			return authToken.AccessToken;
 		}
 	}
 }

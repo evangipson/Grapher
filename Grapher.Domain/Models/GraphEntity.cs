@@ -3,18 +3,18 @@ using Grapher.Base.Models;
 
 namespace Grapher.Domain.Models
 {
-    /// <summary>
-    /// A domain representation of a collection of properties that are returned from the
-    /// <see href="https://learn.microsoft.com/en-us/graph/">Microsoft Graph API</see>
-    /// when requesting an 
-    /// <see href="https://learn.microsoft.com/en-us/graph/api/resources/entity">entity</see>.
-    /// </summary>
-    public class GraphEntity : GraphResponse
-    {
-        /// <summary>
-        /// The backing property for <see cref="BusinessPhones"/>.
-        /// </summary>
-        private IEnumerable<string>? _businessPhones;
+	/// <summary>
+	/// A domain representation of a collection of properties that are returned from the
+	/// <see href="https://learn.microsoft.com/en-us/graph/">Microsoft Graph API</see>
+	/// when requesting an 
+	/// <see href="https://learn.microsoft.com/en-us/graph/api/resources/entity">entity</see>.
+	/// </summary>
+	public class GraphEntity : GraphResponse
+	{
+		/// <summary>
+		/// The backing property for <see cref="BusinessPhones"/>.
+		/// </summary>
+		private IEnumerable<string>? _businessPhones;
 
 		[JsonPropertyName("userPrincipalName")]
 		public string? UserPrincipalName { get; set; }
@@ -50,9 +50,9 @@ namespace Grapher.Domain.Models
 		/// </summary>
 		[JsonPropertyName("businessPhones")]
 		public IEnumerable<string> BusinessPhones
-        {
-            get => _businessPhones ?? (_businessPhones = new List<string>());
-            set => _businessPhones = value;
-        }
-    }
+		{
+			get => _businessPhones ?? (_businessPhones = new List<string>());
+			set => _businessPhones = value;
+		}
+	}
 }
