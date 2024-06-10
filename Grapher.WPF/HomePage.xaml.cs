@@ -8,15 +8,9 @@ namespace Grapher.WPF
     /// </summary>
     public partial class HomePage : Page
     {
-        public HomePage()
-        {
-            InitializeComponent();
-        }
+        public HomePage() => InitializeComponent();
 
-		private void UserButton_Click(object sender, RoutedEventArgs e)
-		{
-            var userAuthUri = new Uri("UserAuth.xaml", UriKind.Relative);
-			MainWindowNavigation.ChangePage(userAuthUri);
-		}
+		private void UserButton_Click(object sender, RoutedEventArgs e) =>
+			MainWindowNavigation.ChangePage(new Uri("UserAuth.xaml", UriKind.Relative));
 	}
 }

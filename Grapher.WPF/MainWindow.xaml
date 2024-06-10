@@ -38,9 +38,9 @@
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 		<!--<Grid.OpacityMask>
-		<VisualBrush Visual="{Binding ElementName=MainBorder}" />
-	</Grid.OpacityMask>
-	<Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6" Grid.RowSpan="6" x:Name="MainBorder" CornerRadius="24" BorderBrush="Transparent" BorderThickness="0" Background="Transparent" />-->
+			<VisualBrush Visual="{Binding ElementName=MainBorder}" />
+		</Grid.OpacityMask>
+		<Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="6" Grid.RowSpan="6" x:Name="MainBorder" CornerRadius="24" BorderBrush="Transparent" BorderThickness="0" Background="Transparent" />-->
 		<Grid Column="0" ColumnSpan="6" Row="0" RowSpan="1" MouseDown="Titlebar_MouseDown">
 			<TextBlock Margin="8,2,8,0">Grapher</TextBlock>
 			<Menu TextElement.FontSize="18" TextElement.Foreground="GhostWhite" Background="#00FFFFFF" HorizontalAlignment="Right">

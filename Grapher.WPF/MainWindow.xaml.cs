@@ -1,68 +1,52 @@
-﻿using System.Runtime.InteropServices;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
+
 using Grapher.Services.Interfaces;
 using Grapher.WPF;
 
 namespace Grapher
 {
-	[StructLayout(LayoutKind.Sequential)]
-	internal struct WindowCompositionAttributeData
-	{
-		public WindowCompositionAttribute Attribute;
-		public IntPtr Data;
-		public int SizeOfData;
-	}
-
-	internal enum WindowCompositionAttribute
-	{
-		WCA_ACCENT_POLICY = 19
-	}
-
-	internal enum AccentState
-	{
-		ACCENT_DISABLED = 0,
-		ACCENT_ENABLE_GRADIENT = 1,
-		ACCENT_ENABLE_TRANSPARENTGRADIENT = 2,
-		ACCENT_ENABLE_BLURBEHIND = 3,
-		ACCENT_INVALID_STATE = 4
-	}
-
-	[StructLayout(LayoutKind.Sequential)]
-	internal struct AccentPolicy
-	{
-		public AccentState AccentState;
-		public int AccentFlags;
-		public int GradientColor;
-		public int AnimationId;
-	}
-
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		public IRequestService RequestService { get; set; }
+		private readonly IWindowBlurService _windowBlurService;
 
-		public static MainWindow? AppContext { get; set; }
-
-		[DllImport("user32.dll")]
-		internal static extern int SetWindowCompositionAttribute(IntPtr hwnd, ref WindowCompositionAttributeData data);
-
-		public MainWindow(IRequestService _requestService)
+		/// <summary>
+		/// A dependency-injected constructor for the main window
+		/// of the application. Any dependencies that are injected
+		/// here can be accessed by pages within the app, as long
+		/// as there is a public property exposing it.
+		/// </summary>
+		/// <param name="_requestService"></param>
+		public MainWindow(IRequestService _requestService, IWindowBlurService windowBlurService)
 		{
-			// allow IRequestService access from child pages
-			// by passing context as a static reference.
-			AppContext = this;
+			_windowBlurService = windowBlurService;
 			RequestService = _requestService;
-
 			InitializeComponent();
-			// show the initial page of the app
 			GrapherNavigationFrame.Navigate(new HomePage());
 		}
 
-		private void Window_Loaded(object sender, RoutedEventArgs e) => EnableBlur();
+		/// <summary>
+		/// A pointer to <c>this</c> window's
+		/// <see cref="WindowInteropHelper"/>, which
+		/// is used when enabling the blurred background
+		/// when the application loads.
+		/// </summary>
+		private IntPtr WindowInteropHelperPointer
+		{
+			get => new WindowInteropHelper(this).Handle;
+		}
+
+		/// <summary>
+		/// A service to make requests which will be
+		/// accessed from child pages.
+		/// </summary>
+		public IRequestService RequestService { get; set; }
+
+		private void Window_Loaded(object sender, RoutedEventArgs e) => _windowBlurService.EnableBlur(WindowInteropHelperPointer);
 
 		private void Window_Close(object sender, RoutedEventArgs e) => Close();
 
@@ -84,27 +68,6 @@ namespace Grapher
 			{
 				DragMove();
 			}
-		}
-
-		internal void EnableBlur()
-		{
-			var windowHelper = new WindowInteropHelper(this);
-
-			var accent = new AccentPolicy();
-			var accentStructSize = Marshal.SizeOf(accent);
-			accent.AccentState = AccentState.ACCENT_ENABLE_BLURBEHIND;
-
-			var accentPtr = Marshal.AllocHGlobal(accentStructSize);
-			Marshal.StructureToPtr(accent, accentPtr, false);
-
-			var data = new WindowCompositionAttributeData();
-			data.Attribute = WindowCompositionAttribute.WCA_ACCENT_POLICY;
-			data.SizeOfData = accentStructSize;
-			data.Data = accentPtr;
-
-			SetWindowCompositionAttribute(windowHelper.Handle, ref data);
-
-			Marshal.FreeHGlobal(accentPtr);
 		}
 	}
 }

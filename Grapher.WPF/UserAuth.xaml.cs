@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 
 using Grapher.Services.Interfaces;
 
@@ -11,11 +12,16 @@ namespace Grapher.WPF
     {
 		private readonly IRequestService? _requestService;
 
-        public UserAuth()
+		public UserAuth()
 		{
-			_requestService = MainWindow.AppContext?.RequestService;
+			_requestService = MainWindow?.RequestService;
 			InitializeComponent();
 			RenderEntity();
+		}
+
+		private MainWindow? MainWindow
+		{
+			get => Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
 		}
 
 		private void RenderEntity()
