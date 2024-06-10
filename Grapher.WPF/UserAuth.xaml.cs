@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows.Controls;
+
+using Grapher.Services.Interfaces;
 
 namespace Grapher.WPF
 {
@@ -20,9 +9,29 @@ namespace Grapher.WPF
     /// </summary>
     public partial class UserAuth : Page
     {
+		private readonly IRequestService? _requestService;
+
         public UserAuth()
-        {
-            InitializeComponent();
-        }
-    }
+		{
+			_requestService = MainWindow.AppContext?.RequestService;
+			InitializeComponent();
+			RenderEntity();
+		}
+
+		private void RenderEntity()
+		{
+			var entity = _requestService?.GetGraphEntity();
+			AppId.Text = entity?.Id;
+			ODataContext.Text = entity?.ODataContext;
+		}
+
+		private void RenderApplication()
+		{
+			var application = _requestService?.GetGraphApplication();
+			DisplayName.Text = application?.DisplayName;
+			AppId.Text = application?.AppId;
+			ODataContext.Text = application?.ODataContext;
+			CreatedDateTime.Text = application?.CreatedDateTime;
+		}
+	}
 }

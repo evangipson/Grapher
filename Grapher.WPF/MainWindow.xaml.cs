@@ -2,8 +2,8 @@
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
-
 using Grapher.Services.Interfaces;
+using Grapher.WPF;
 
 namespace Grapher
 {
@@ -43,17 +43,23 @@ namespace Grapher
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		public IRequestService RequestService { get; set; }
+
+		public static MainWindow? AppContext { get; set; }
+
 		[DllImport("user32.dll")]
 		internal static extern int SetWindowCompositionAttribute(IntPtr hwnd, ref WindowCompositionAttributeData data);
 
-		private readonly IRequestService _requestService;
-
-		public MainWindow(IRequestService requestService)
+		public MainWindow(IRequestService _requestService)
 		{
-			InitializeComponent();
-			_requestService = requestService;
+			// allow IRequestService access from child pages
+			// by passing context as a static reference.
+			AppContext = this;
+			RequestService = _requestService;
 
-			RenderEntity();
+			InitializeComponent();
+			// show the initial page of the app
+			GrapherNavigationFrame.Navigate(new HomePage());
 		}
 
 		private void Window_Loaded(object sender, RoutedEventArgs e) => EnableBlur();
@@ -78,22 +84,6 @@ namespace Grapher
 			{
 				DragMove();
 			}
-		}
-
-		private void RenderEntity()
-		{
-			var entity = _requestService.GetGraphEntity();
-			AppId.Text = entity.Id;
-			ODataContext.Text = entity.ODataContext;
-		}
-
-		private void RenderApplication()
-		{
-			var application = _requestService.GetGraphApplication();
-			DisplayName.Text = application.DisplayName;
-			AppId.Text = application.AppId;
-			ODataContext.Text = application.ODataContext;
-			CreatedDateTime.Text = application.CreatedDateTime;
 		}
 
 		internal void EnableBlur()

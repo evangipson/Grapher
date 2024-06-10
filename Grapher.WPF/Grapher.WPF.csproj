@@ -29,4 +29,10 @@
     <Resource Include="MainStyle.xaml" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="MainWindowNavigation.cs">
+      <Generator>MSBuild:Compile</Generator>
+    </Compile>
+  </ItemGroup>
+
 </Project>

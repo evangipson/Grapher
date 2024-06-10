@@ -11,8 +11,6 @@
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*" />
 			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*" />
@@ -20,12 +18,59 @@
 			<RowDefinition Height="*" />
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
-		<Grid Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
-			<TextBlock Text="This is the User Authentication Page."/>
+		<Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2">
+			<TextBlock Text="User Information" HorizontalAlignment="Center" />
+		</Grid>
+		<Grid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
 			<StackPanel>
-				<TextBlock x:Name="ODataContext" FontSize="32" />
-				<TextBlock x:Name="AppId" FontSize="32" />
-				<TextBlock x:Name="CreatedDateTime" FontSize="32" />
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*" />
+						<RowDefinition Height="*" />
+					</Grid.RowDefinitions>
+					<Label Grid.Column="0" Grid.Row="0" Foreground="GhostWhite" Content="Display Name:" />
+					<TextBlock Grid.Column="1" Grid.Row="0" x:Name="DisplayName" />
+				</Grid>
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*" />
+						<RowDefinition Height="*" />
+					</Grid.RowDefinitions>
+					<Label Grid.Column="0" Grid.Row="0" Foreground="GhostWhite" Content="OData Context:" />
+					<TextBlock Grid.Column="1" Grid.Row="0" x:Name="ODataContext" />
+				</Grid>
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*" />
+						<RowDefinition Height="*" />
+					</Grid.RowDefinitions>
+					<Label Grid.Column="0" Grid.Row="0" Foreground="GhostWhite" Content="User Id:" />
+					<TextBlock Grid.Column="1" Grid.Row="0" x:Name="AppId" />
+				</Grid>
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*" />
+						<RowDefinition Height="*" />
+					</Grid.RowDefinitions>
+					<Label Grid.Column="0" Grid.Row="0" Foreground="GhostWhite" Content="Created Date Time:" />
+					<TextBlock Grid.Column="1" Grid.Row="0" x:Name="CreatedDateTime" />
+				</Grid>
 			</StackPanel>
 		</Grid>
 	</Grid>
