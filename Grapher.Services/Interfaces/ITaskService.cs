@@ -1,4 +1,4 @@
-﻿namespace Grapher.Base.Services.Interfaces
+﻿namespace Grapher.Services.Interfaces
 {
 	public interface ITaskService
 	{

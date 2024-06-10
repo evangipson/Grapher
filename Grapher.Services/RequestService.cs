@@ -2,7 +2,6 @@
 using System.Net.Http.Json;
 
 using Grapher.Base.DependencyInjection;
-using Grapher.Base.Services.Interfaces;
 using Grapher.Domain.Models;
 using Grapher.Services.Interfaces;
 
