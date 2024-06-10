@@ -3,9 +3,8 @@ using System.Windows.Input;
 using System.Windows.Interop;
 
 using Grapher.Services.Interfaces;
-using Grapher.WPF;
 
-namespace Grapher
+namespace Grapher.WPF.Views
 {
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml

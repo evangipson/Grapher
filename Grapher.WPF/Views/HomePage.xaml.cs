@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace Grapher.WPF
+namespace Grapher.WPF.Views
 {
     /// <summary>
     /// Interaction logic for HomePage.xaml
@@ -11,6 +11,6 @@ namespace Grapher.WPF
         public HomePage() => InitializeComponent();
 
 		private void UserButton_Click(object sender, RoutedEventArgs e) =>
-			MainWindowNavigation.ChangePage(new Uri("UserAuth.xaml", UriKind.Relative));
+			MainWindowNavigationExtension.ChangePage(new Uri("/Views/UserAuth.xaml", UriKind.Relative));
 	}
 }

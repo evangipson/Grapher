@@ -1,8 +1,8 @@
 ﻿using System.Windows;
 
-using Grapher;
+using Grapher.WPF.Views;
 
-public static class MainWindowNavigation
+public static class MainWindowNavigationExtension
 {
 	private static MainWindow? _mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
 

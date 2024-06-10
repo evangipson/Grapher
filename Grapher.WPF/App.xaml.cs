@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 using Grapher.Base.DependencyInjection;
 using Grapher.Services;
+using Grapher.WPF.Views;
 
 namespace Grapher
 {

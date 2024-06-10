@@ -3,7 +3,7 @@ using System.Windows.Controls;
 
 using Grapher.Services.Interfaces;
 
-namespace Grapher.WPF
+namespace Grapher.WPF.Views
 {
     /// <summary>
     /// Interaction logic for UserAuth.xaml

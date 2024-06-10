@@ -1,7 +1,5 @@
 ﻿using System.Text.Json.Serialization;
 
-using Grapher.Base.Models;
-
 namespace Grapher.Domain.Models
 {
 	/// <summary>

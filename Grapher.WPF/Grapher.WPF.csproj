@@ -20,17 +20,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Include="App.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Grapher.Base\Grapher.Base.csproj" />
     <ProjectReference Include="..\Grapher.Domain\Grapher.Domain.csproj" />
     <ProjectReference Include="..\Grapher.Services\Grapher.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="MainStyle.xaml" />
+    <Resource Include="Styles\MainStyle.xaml" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="MainWindowNavigation.cs">
+    <Compile Update="Extensions\MainWindowNavigationExtension.cs">
       <Generator>MSBuild:Compile</Generator>
     </Compile>
   </ItemGroup>

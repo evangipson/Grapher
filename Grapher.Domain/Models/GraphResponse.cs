@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Grapher.Base.Models
+namespace Grapher.Domain.Models
 {
 	/// <summary>
 	/// The lowest-level of common information returned from

@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 using Grapher.Base.DependencyInjection;
-using Grapher.Base.Models;
+using Grapher.Domain.Models;
 using Grapher.Services.Interfaces;
 
 namespace Grapher.Services

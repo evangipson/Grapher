@@ -1,9 +1,9 @@
-﻿<Page x:Class="Grapher.WPF.HomePage"
+﻿<Page x:Class="Grapher.WPF.Views.HomePage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Grapher.WPF"
+      xmlns:local="clr-namespace:Grapher.WPF.Views"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="HomePage">
@@ -11,7 +11,7 @@
 		<Grid.Resources>
 			<ResourceDictionary>
 				<ResourceDictionary.MergedDictionaries>
-					<ResourceDictionary Source="MainStyle.xaml"/>
+					<ResourceDictionary Source="/Styles/MainStyle.xaml"/>
 				</ResourceDictionary.MergedDictionaries>
 			</ResourceDictionary>
 		</Grid.Resources>

@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Grapher.Base.Models
+namespace Grapher.Domain.Models
 {
 	public class AuthTokenResponse
 	{
